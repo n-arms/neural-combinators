@@ -10,8 +10,8 @@ impl Neuron<1, 1, 2> for LinearReg {
         [params[0]]
     }
 
-    fn gradient(&self, input: [f64;1], _: [f64;2]) -> [f64;2] {
-        [input[0], 1.0]
+    fn gradient(&self, input: [f64;1], _: [f64;2]) -> [[f64;1];2] {
+        [[input[0]], [1.0]]
     }
 }
 
@@ -32,7 +32,18 @@ mod tests {
 
     #[test]
     fn linear_gradient() {
-        assert_eq!(LinearReg{}.gradient([2.0], [3.0, 2.0]), [2.0, 1.0]);
-        assert_eq!(LinearReg{}.gradient([5.0], [7.0, 11.0]), [5.0, 1.0]);
+        assert_eq!(LinearReg{}.gradient([2.0], [3.0, 2.0]), [[2.0], [1.0]]);
+        assert_eq!(LinearReg{}.gradient([5.0], [7.0, 11.0]), [[5.0], [1.0]]);
+    }
+
+    #[test]
+    fn linear_train() {
+        let d = vec![
+            ([-1.0], [-2.0]),
+            ([0.0], [1.0]),
+            ([1.0], [4.0])
+        ];
+        println!("{:?}", LinearReg{}.train(d, 0.1, 100));
+        panic!();
     }
 }
