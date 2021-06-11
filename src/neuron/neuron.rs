@@ -1,3 +1,10 @@
+#[macro_export]
+macro_rules! assert_close {
+    ($a:expr, $b:expr) => {
+        assert!(($a - $b).abs() < 0.01);
+    }
+}
+
 pub trait Neuron<const I: usize, const O: usize, const P: usize> {
     fn eval(&self, input: [f64;I], params: [f64;P]) -> [f64;O];
     fn derivative(&self, input: [f64;I], params: [f64;P]) -> [f64;O];

@@ -1,5 +1,5 @@
 pub struct LinearReg;
-use crate::neuron::neuron::Neuron;
+use crate::neuron::neuron::*;
 
 impl Neuron<1, 1, 2> for LinearReg {
     fn eval(&self, input: [f64;1], params: [f64;2]) -> [f64;1] {
@@ -43,7 +43,9 @@ mod tests {
             ([0.0], [1.0]),
             ([1.0], [4.0])
         ];
-        println!("{:?}", LinearReg{}.train(d, 0.1, 100));
-        panic!();
+        let r = LinearReg{}.train(d, 0.1, 100);
+        println!("{:?}", r);
+        assert_close!(r[0], 3.0);
+        assert_close!(r[1], 1.0);
     }
 }
