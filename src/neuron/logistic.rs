@@ -7,9 +7,9 @@ impl Neuron<1, 1, 0> for LogisticReg {
         [1.0/(1.0+(-input[0]).exp())]
     }
 
-    fn derivative(&self, input: [f64;1], _: [f64;0]) -> [f64;1] {
+    fn derivative(&self, input: [f64;1], _: [f64;0]) -> [[f64;1];1] {
         let [e] = self.eval(input, []);
-        [e * (1.0 - e)]
+        [[e * (1.0 - e)]]
     }
 
     fn gradient(&self, _: [f64;1], _: [f64;0]) -> [[f64;1];0] {
@@ -28,8 +28,8 @@ mod tests {
 
     #[test]
     fn logistic_derivative() {
-        assert_close!(LogisticReg{}.derivative([2.0], [])[0], 0.10499); 
-        assert_close!(LogisticReg{}.derivative([5.0], [])[0], 0.00664);
+        assert_close!(LogisticReg{}.derivative([2.0], [])[0][0], 0.10499); 
+        assert_close!(LogisticReg{}.derivative([5.0], [])[0][0], 0.00664);
     }
 
     #[test]

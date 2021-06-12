@@ -6,8 +6,8 @@ impl Neuron<1, 1, 3> for QuadReg {
         [params[0] * input[0] * input[0] + params[1] * input[0] + params[2]]
     }
 
-    fn derivative(&self, input: [f64;1], params: [f64;3]) -> [f64;1] {
-        [params[0] *2.0 * input[0] + params[1]]
+    fn derivative(&self, input: [f64;1], params: [f64;3]) -> [[f64;1];1] {
+        [[params[0] *2.0 * input[0] + params[1]]]
     }
 
     fn gradient(&self, input: [f64;1], _: [f64;3]) -> [[f64;1];3] {
@@ -27,8 +27,8 @@ mod test {
 
     #[test]
     fn quad_derivative() {
-        assert_eq!(QuadReg{}.derivative([2.0], [2.0, 3.0, 5.0]), [11.0]);
-        assert_eq!(QuadReg{}.derivative([5.0], [7.0, 11.0, 13.0]), [81.0]);
+        assert_eq!(QuadReg{}.derivative([2.0], [2.0, 3.0, 5.0]), [[11.0]]);
+        assert_eq!(QuadReg{}.derivative([5.0], [7.0, 11.0, 13.0]), [[81.0]]);
     }
 
     #[test]

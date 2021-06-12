@@ -6,8 +6,8 @@ impl Neuron<1, 1, 2> for LinearReg {
         [params[0] * input[0] + params[1]]
     }
 
-    fn derivative(&self, _: [f64;1], params: [f64;2]) -> [f64;1] {
-        [params[0]]
+    fn derivative(&self, _: [f64;1], params: [f64;2]) -> [[f64;1];1] {
+        [[params[0]]]
     }
 
     fn gradient(&self, input: [f64;1], _: [f64;2]) -> [[f64;1];2] {
@@ -26,8 +26,8 @@ mod tests {
 
     #[test]
     fn linear_derivative() {
-        assert_eq!(LinearReg{}.derivative([2.0], [3.0, 2.0]), [3.0]); 
-        assert_eq!(LinearReg{}.derivative([5.0], [7.0, 11.0]), [7.0]);
+        assert_eq!(LinearReg{}.derivative([2.0], [3.0, 2.0]), [[3.0]]); 
+        assert_eq!(LinearReg{}.derivative([5.0], [7.0, 11.0]), [[7.0]]);
     }
 
     #[test]
