@@ -2,7 +2,7 @@
 macro_rules! assert_close {
     ($a:expr, $b:expr) => {
         if !(($a - $b).abs() < 0.01) {
-            panic!(format!("assertion failed: {} != {}", $a, $b));
+            panic!("assertion failed: {} != {}", $a, $b);
         }
     }
 }
